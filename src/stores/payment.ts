@@ -39,7 +39,7 @@ export const usePaymentStore = defineStore('payment', () => {
     const result = await makeCallToApi(() => checkout({ cardData, id }));
     if (result) {
       orderConfirmedStatus.value = result;
-      router.push('/confirmation');
+      router.push('/success');
     }
   }
 
