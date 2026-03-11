@@ -6,8 +6,10 @@ import Accordion from "../components/shared/Accordion.vue";
 
 import Breadcrumbs from "../components/shared/Breadcrumbs.vue";
 import { usePaymentStore } from "../stores/payment";
+import { storeToRefs } from "pinia";
 
 const paymentStore = usePaymentStore();
+const { error } = storeToRefs(paymentStore);
 const { payByCard } = paymentStore;
 
 document.title = "Tebex - Frontend task";
@@ -24,7 +26,7 @@ document.title = "Tebex - Frontend task";
       <Breadcrumbs
         :pageBreadcrumbs="[{ name: 'Make Payment', link: 'checkout' }, { name: 'Order Confirmed', link: 'success' }]"
         currentPage="checkout" class="mb-5 mt-20" />
-      <PaymentForm @submit-card="payByCard" />
+      <PaymentForm @submit-card="payByCard" :externalError="error" />
     </SectionLayout>
   </div>
 
@@ -39,7 +41,7 @@ document.title = "Tebex - Frontend task";
       </template>
 
       <template #content-2>
-        <PaymentForm @submit-card="payByCard" />
+        <PaymentForm @submit-card="payByCard" :externalError="error" />
       </template>
     </Accordion>
   </div>

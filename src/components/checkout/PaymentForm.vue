@@ -6,6 +6,10 @@ import type { CardFormData } from "../../schema/card";
 import AppInput from "../atoms/AppInput.vue";
 import AppButton from "../atoms/AppButton.vue";
 
+const props = defineProps<{
+  externalError: string | null;
+}>();
+
 const emit = defineEmits<{
   "submit-card": [cardDetails: CardFormData];
 }>();
@@ -48,6 +52,9 @@ function handleSubmit() {
 </script>
 
 <template>
+  <p v-if="externalError" class="bg-red-500 text-white p-4 mb-4" data-testid="external-error">
+    {{ externalError }}
+  </p>
   <form @submit.prevent="handleSubmit" class="flex flex-col gap-6">
     <AppInput id="email" label="Email" placeholder="Enter your email address" v-model="card.email"
       :error="errors.email" :markRequired="true" :required="true" />
