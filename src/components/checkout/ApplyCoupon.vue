@@ -19,7 +19,7 @@ function handleApplyCoupon() {
     return;
   }
 
-  emit("apply-coupon", model.value);
+  emit("apply-coupon", model.value.toUpperCase());
   error.value = '';
 }
 </script>

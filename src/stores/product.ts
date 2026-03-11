@@ -1,12 +1,11 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 import { fetchBasketItems, applyCouponCode, checkout } from '../api';
-
 import type { CardFormData } from '../schema/card';
 import type { Basket } from '../types/basket';
 import type { SuccessResponse } from '../types/success';
-import { useRouter } from 'vue-router';
 
 export const useProductStore = defineStore('product', () => {
   const basketItems = ref<Basket | null>(null);
@@ -15,46 +14,51 @@ export const useProductStore = defineStore('product', () => {
   const error = ref<string | null>(null);
   const router = useRouter();
 
-  async function getBasketItems() {
+  async function makeCallToApi<T>(apiCall: () => Promise<T>): Promise<T | null> {
     loading.value = true;
     error.value = null;
     try {
-      const items = await fetchBasketItems();
-      basketItems.value = items;
-    } catch (error) {
-      console.error("Error fetching basket items:", error);
+      return await apiCall();
+    } catch (err) {
+      error.value = err instanceof Error ? err.message : 'An error occurred';
+      console.error("API call error:", err);
+      return null;
     } finally {
       loading.value = false;
     }
   }
 
-  async function applyCode({code, id}: {code: string, id: string}) {
-    loading.value = true;
-    error.value = null;
-    try {
-      const items = await applyCouponCode({ code, id });
+  async function getBasketItems() {
+    const items = await makeCallToApi(fetchBasketItems);
+    if (items) {
       basketItems.value = items;
-    } catch (error) {
-      console.error("Error applying coupon code:", error);
-    } finally {
-      loading.value = false;
+    }
+  }
+
+  async function applyCode(code: string) {
+    if (!basketItems.value?.id) {
+      error.value = "No items in the basket.";
+      return;
+    }
+
+    const result = await makeCallToApi(() => applyCouponCode({ code, id: basketItems.value!.id }));
+    if (result) {
+      basketItems.value = result;
     }
   }
 
   async function payByCard(cardData: CardFormData) {
-    loading.value = true;
-    error.value = null;
-    try {
-      const result = await checkout({ cardData, id: basketItems.value?.id || '' });
+    if (!basketItems.value?.id) {
+      error.value = "No items in the basket.";
+      return;
+    }
+    
+    const result = await makeCallToApi(() => checkout({ cardData, id: basketItems.value!.id }));
+    if (result) {
       orderConfirmedStatus.value = result;
-      router.push('/success');
-    } catch (error) {
-      console.error("Error during checkout:", error);
-      throw error;
-    } finally {
-      loading.value = false;
+      router.push('/confirmation');
     }
   }
 
-  return { basketItems, loading, error, getBasketItems, applyCode, payByCard, orderConfirmedStatus }
-})
+  return { basketItems, loading, error, getBasketItems, applyCode, payByCard, orderConfirmedStatus };
+});

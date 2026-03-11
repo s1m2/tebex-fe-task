@@ -8,7 +8,7 @@ const props = defineProps<{
   amount: number;
   isDiscount?: boolean;
   isTotal?: boolean;
-  discountCode?: string;
+  couponCode?: string;
 }>();
 
 const formattedAmount = computed(() => {
@@ -23,9 +23,8 @@ const isTotalStyle = computed(() => props.isTotal ? 'text-lg font-bold' : '');
   <div class="flex justify-between">
     <div class="flex flex-col gap-1.5">
       <p :data-testid="`amount-row-label-${label}`" :class="[isTotalStyle]">{{ label }}</p>
-      <AppBadge v-if="isDiscount" :data-testid="`amount-row-discount-${label}`">{{ discountCode }}</AppBadge>
+      <AppBadge v-if="isDiscount" :data-testid="`amount-row-discount-${label}`">{{ couponCode }}</AppBadge>
     </div>
-    
     <p :data-testid="`amount-row-amount-${label}`" :class="['self-end', isTotalStyle]">{{ formattedAmount }}</p>
   </div>
 </template>

@@ -12,7 +12,6 @@ describe('OrderContainer.vue', () => {
   it('renders the component', async () => {
     const store = useProductStore();
     
-    // Mock the basketItems
     store.basketItems = {
       id: "1",
       products: [
