@@ -52,6 +52,10 @@ Run Cypress tests in headless mode:
 npm run cypress:headless
 ```
 
+Project testing external url 
+
+https://tebex-fe-task.netlify.app/
+
 ## Project Structure
 
 - **`src/`** - Main application source code

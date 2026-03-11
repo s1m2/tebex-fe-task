@@ -26,7 +26,7 @@ onMounted(() => {
     <p data-testid="error-order-container" class=" text-white">Failed to load your order. Please try again later or refresh the page.</p>
   </template>
 
-  <template v-if="basketItems">
+  <template v-if="basketItems && basketItems.products.length > 0 && !loading && !error">
     <p data-testid="order-container-title" class="font-bold mb-5">Your order</p>
     <OrderItem v-for="product in basketItems.products" :key="product.name+product.price" :product="product" class="mb-5" />
     <div class="h-20 md:h-[165px] "></div>
@@ -34,5 +34,5 @@ onMounted(() => {
     <RowContainer :basket-items="basketItems" />
   </template>
 
-  <p v-else data-testid="empty-order-container" class=" text-white">Your basket is empty.</p>
+  <p v-if="(!basketItems || basketItems.products.length === 0) && !loading && !error" data-testid="empty-order-container" class=" text-white">Your basket is empty.</p>
 </template>
