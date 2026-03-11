@@ -6,6 +6,10 @@ import AppButton from "../atoms/AppButton.vue";
 
 import { APPLY_COUPON_ERROR_MESSAGES } from "../../constants";
 
+defineProps<{
+  externalError: string | null;
+}>();
+
 const emit = defineEmits<{
   "apply-coupon": [code: string];
 }>();
@@ -29,7 +33,7 @@ function handleApplyCoupon() {
       <AppInput v-model="model" id="code" label="Coupon/Gift Card" placeholder="Enter code here" class="w-full" />
       <AppButton data-testid="apply-coupon-button" class="self-end" variant="secondary" @click="handleApplyCoupon">Confirm</AppButton>
     </div>
-    <p v-if="error" data-testid="no-coupon-applied-error" class="text-red-500 text-sm mt-1">{{ error }}</p>
+    <p v-if="error || externalError" data-testid="no-coupon-applied-error" class="text-red-500 text-sm mt-1">{{ error || externalError }}</p>
   </div>
 
 </template>

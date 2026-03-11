@@ -4,11 +4,11 @@ import OrderContainer from "../components/checkout/OrderContainer.vue";
 import PaymentForm from "../components/checkout/PaymentForm.vue";
 import Accordion from "../components/shared/Accordion.vue";
 
-import { useProductStore } from "../stores/product";
 import Breadcrumbs from "../components/shared/Breadcrumbs.vue";
+import { usePaymentStore } from "../stores/payment";
 
-const productStore = useProductStore();
-const { payByCard } = productStore;
+const paymentStore = usePaymentStore();
+const { payByCard } = paymentStore;
 
 document.title = "Tebex - Frontend task";
 </script>

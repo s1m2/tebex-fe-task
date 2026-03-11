@@ -7,10 +7,15 @@ import RowContainer from "./RowContainer.vue";
 
 import { useProductStore } from "../../stores/product";
 import { storeToRefs } from "pinia";
+import { useCouponStore } from "../../stores/coupon";
 
 const productStore = useProductStore();
+const couponStore = useCouponStore();
+
 const { basketItems, loading, error } = storeToRefs(productStore);
-const { getBasketItems, applyCode } = productStore;
+const { error: couponError } = storeToRefs(couponStore);
+const { getBasketItems } = productStore;
+const { applyCode } = couponStore;
 
 onMounted(() => {
   if(basketItems.value === null) getBasketItems();
@@ -30,7 +35,7 @@ onMounted(() => {
     <p data-testid="order-container-title" class="font-bold mb-5">Your order</p>
     <OrderItem v-for="product in basketItems.products" :key="product.name+product.price" :product="product" class="mb-5" />
     <div class="h-20 md:h-[165px] "></div>
-    <ApplyCoupon @apply-coupon="applyCode" class="mb-6" />
+    <ApplyCoupon @apply-coupon="applyCode" :externalError="couponError" class="mb-6" />
     <RowContainer :basket-items="basketItems" />
   </template>
 
