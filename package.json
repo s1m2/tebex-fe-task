@@ -10,9 +10,7 @@
     "api": "node ./api/server.js",
     "test": "vitest",
     "cypress:open": "cypress open",
-    "cypress:headless": "cypress run",
-    "cypress:run": "start-server-and-test dev http://localhost:3000 cypress:headless",
-    "cypress:run:prod": "start-server-and-test start http://localhost:3000 cypress:headless"
+    "cypress:headless": "cypress run"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.1",

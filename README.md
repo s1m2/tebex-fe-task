@@ -1,40 +1,71 @@
 # Tebex Front-end Quest
 
-Greetings, adventurer! Embark upon this tech task as a noble quest.
+## Installation and Setup
 
-## Overview
+### Node Version
 
-We would like you to create a simple front-end for a checkout using the Figma designs provided. In this project there are APIs that will enable you to complete the task.
+This project requires **Node.js v18 or higher**.
 
-You may use any tools/libraries you need to help you to complete this quest!
-
-### What are we looking for?
-
-- Does the end product look exactly like the designs?
-- Does the form have some validation?
-- Is the code clean, consistent and extensible?
-- Add unit tests or e2e tests, you don't need to get 100% coverage a few tests should suffice
-- Consider responsive design, how does it look on mobile?
-
-Ready to get started?
-
-### Setup
+### Install Dependencies
 
 ```shell
 npm install
 ```
 
-Launch the APIs this will run on port 3000
+### Run Development Server
+
+```shell
+npm run dev
+```
+
+The dev server will start on `http://localhost:8080`.
+
+### Run the API Server
 
 ```shell
 npm run api
 ```
 
-This project uses vite to run the dev server execute
+The API server runs on `http://localhost:3000`.
+
+## Testing
+
+### Unit Tests
+
+Run the unit tests:
 
 ```shell
-npm run dev
+npm run test
 ```
+
+### E2E Tests
+
+Open Cypress for interactive testing:
+
+```shell
+npm run cypress:open
+```
+
+Run Cypress tests in headless mode:
+
+```shell
+npm run cypress:headless
+```
+
+## Project Structure
+
+- **`src/`** - Main application source code
+  - **`components/`** - Vue components (atoms, checkout, shared)
+  - **`views/`** - Page components (CheckoutView, SuccessView)
+  - **`stores/`** - Pinia state management
+  - **`api/`** - API integration
+  - **`types/`** - TypeScript type definitions
+  - **`utils/`** - Helper utilities
+  - **`constants/`** - Application constants
+  - **`schema/`** - Validation schemas
+- **`api/`** - Backend API server (Node.js/Fastify)
+- **`cypress/`** - E2E tests
+- **`public/`** - Static assets (images, etc.)
 
 ### API endpoints
 
