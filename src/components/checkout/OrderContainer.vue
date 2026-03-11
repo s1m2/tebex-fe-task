@@ -30,4 +30,5 @@ onMounted(() => {
     <AmountRow v-if="basketItems.couponCode" label="Discounts:" :amount="calculateDiscountAmount(basketItems.total, DISCOUNT_MAPPING[basketItems.couponCode])" :is-discount="true" class="mb-3" />
     <AmountRow label="Total:" :amount="basketItems.total" :is-total="true" />
   </template>
+  <p v-else data-testid="empty-order-container" class="text-center text-white">Your basket is empty.</p>
 </template>

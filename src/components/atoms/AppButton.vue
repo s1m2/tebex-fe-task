@@ -6,11 +6,9 @@ const props = defineProps<{
 }>();
 
 const classObject = computed(() => ({
-  'bg-[#41C4C3]': props.variant === 'primary',
-  'bg-[#E5E5E5]': props.variant === 'secondary',
+  'bg-[#41C4C3] hover:bg-[#36A9A8]': props.variant === 'primary',
+  'bg-[#E5E5E5] hover:bg-[#CCCCCC]': props.variant === 'secondary',
 }))
-
-
 </script>
 
 <template>

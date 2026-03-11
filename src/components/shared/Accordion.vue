@@ -12,7 +12,7 @@ const props = defineProps<{
 
 const expandedIds = ref<Set<string>>(new Set());
 
-const toggleItem = (id: string) => {
+function toggleItem(id: string) {
   if (expandedIds.value.has(id)) {
     expandedIds.value.delete(id);
   } else {
@@ -21,7 +21,7 @@ const toggleItem = (id: string) => {
   }
 };
 
-const isExpanded = (id: string) => {
+function isExpanded(id: string) {
   return expandedIds.value.has(id);
 };
 </script>

@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex justify-between">
+  <div data-testid="order-item" class="flex justify-between">
     <img :data-testid="`order-item-image-${product.name}`" :src="`/img/products/${product.image}`" :alt="product.name" class="h-10 w-10 aspect-square object-cover" />
     <div class="grow">
       <p :data-testid="`order-item-name-${product.name}`" class="font-semibold">{{ product.name }}</p>

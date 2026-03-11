@@ -4,6 +4,8 @@ import { ref } from "vue";
 import AppInput from "../atoms/AppInput.vue";
 import AppButton from "../atoms/AppButton.vue";
 
+import { APPLY_COUPON_ERROR_MESSAGES } from "../../constants";
+
 const emit = defineEmits<{
   "apply-coupon": [code: string];
 }>();
@@ -13,7 +15,7 @@ const error = ref<string>('');
 
 function handleApplyCoupon() {
   if (!model.value) {
-    error.value = "Please enter a coupon code.";
+    error.value = APPLY_COUPON_ERROR_MESSAGES.EMPTY_CODE;
     return;
   }
 

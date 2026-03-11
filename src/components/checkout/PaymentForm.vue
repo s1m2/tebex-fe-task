@@ -33,16 +33,17 @@ function handleSubmit() {
 
   const result = CardSchema.safeParse(card.value);
 
-  if (result.success) {
-    emit("submit-card", result.data);
-  } else {
-    result.error.issues.forEach((iss) => {
-      const key = iss.path[0];
+  if (!result.success) {
+    result.error.issues.forEach((issue) => {
+      const key = issue.path[0];
       if (typeof key === "string" && key in errors.value) {
-        errors.value[key as keyof typeof errors.value] = iss.message;
+        errors.value[key as keyof typeof errors.value] = issue.message;
       }
     });
+    return;
   }
+
+  emit("submit-card", result.data);
 }
 </script>
 

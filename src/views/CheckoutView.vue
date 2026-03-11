@@ -23,7 +23,7 @@ document.title = "Tebex - Frontend task";
     <SectionLayout variant="secondary">
       <Breadcrumbs
         :pageBreadcrumbs="[{ name: 'Make Payment', link: 'checkout' }, { name: 'Order Confirmed', link: 'success' }]"
-        currentPage="checkout" class="mb-5 " />
+        currentPage="checkout" class="mb-5 mt-20" />
       <PaymentForm @submit-card="payByCard" />
     </SectionLayout>
   </div>
@@ -35,9 +35,7 @@ document.title = "Tebex - Frontend task";
       { id: '2', title: 'Payment Information' }
     ]">
       <template #content-1>
-        <KeepAlive>
-          <component :is="OrderContainer" />
-        </KeepAlive>
+        <OrderContainer />
       </template>
 
       <template #content-2>
