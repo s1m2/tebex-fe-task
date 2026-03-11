@@ -21,7 +21,7 @@ describe('AmountRow.vue', () => {
         label: 'Discounts:',
         amount: 10,
         isDiscount: true,
-        discountCode: 'SAVE10'
+        couponCode: 'SAVE10'
       }
     });
 
@@ -35,7 +35,7 @@ describe('AmountRow.vue', () => {
         label: 'Discounts:',
         amount: 10,
         isDiscount: true,
-        discountCode: 'SAVE10'
+        couponCode: 'SAVE10'
       }
     });
 

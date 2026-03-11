@@ -38,7 +38,7 @@ describe('CheckoutView.vue', () => {
 
   it('renders grid layout with two columns', () => {
     const wrapper = mountComponent();
-    const grid = wrapper.find('.grid');
+    const grid = wrapper.find('[data-testid="checkout-page"]');
     expect(grid.exists()).toBe(true);
     expect(grid.classes()).toContain('grid-cols-2');
   });
