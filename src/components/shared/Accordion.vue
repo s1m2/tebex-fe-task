@@ -6,7 +6,7 @@ type AccordionItem = {
   title: string;
 }
 
-const props = defineProps<{
+defineProps<{
   items: AccordionItem[];
 }>();
 
